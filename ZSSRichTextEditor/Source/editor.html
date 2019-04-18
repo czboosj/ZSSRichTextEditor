@@ -10,6 +10,33 @@
     /* Custom CSS Styling */
     
     /*customcss*/
+body .zss_editor_title{
+    
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: inherit;
+    border-color: inherit;
+}
+body .zss_editor_title2{
+    margin: 0px,0px,0px,0px;
+    width: 95%;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: inherit;
+    border-color: inherit;
+    -webkit-overflow-scrolling: touch;
+    overflow:auto;
+}
+
+body .line{
+    border-top: 1px dotted #C7C9CC;
+    margin-top: 1rem;
+}
     
 </style>
 
@@ -47,7 +74,7 @@ html, body {
 body {
 	padding: 10px;
 	overflow-y: scroll;
-	-webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch;
 	height: 100%;
 }
 
@@ -60,13 +87,15 @@ audio {
 }
 
 div.zs_editor_content {
-	width: 100%;
-	height: 100%;
-	-webkit-overflow-scrolling: touch;
-	overflow:auto;
+    margin: 10px,0px,0px,0px;
+    width: 100%;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+    overflow:auto;
+
 }
 
-[placeholder]:empty:before {
+[placeholder]:empty:not(:focus):before {
     content: attr(placeholder);
     color: #555; 
 }
@@ -74,18 +103,28 @@ div.zs_editor_content {
 [placeholder]:empty:focus:before {
     content: "";
 }
-	
+
 </style>
 
 </head>
 
 <body onLoad="zss_editor.init();">
 
-	<!-- ZSSRichTextEditor Editable Content -->
-	<div id="zss_editor_content" class="zs_editor_content" contenteditable="true" placeholder=""></div>
+   
+        <!--<div class='imgbox'><img id="cover" onclick="window.RE.upimg()" src="https://img0.bevol.cn/UploadFile/find/0_0d394c19-64d2-48db-93e1-61fc3bfaded1.jpg">-->
+        <!--<div id="mc"><button id="upimg" onclick="window.RE.upimg()">更换封面</button></div>-->
+        <!--</div>-->
+<!--        <input type="text" placeholder="请输入标题" class="zss_editor_title2" maxlength="15" oninput="window.RE.inputlength(value)" id="zss_editor_title2">-->
+    <div id= "zss_editor_title" class = "zss_editor_title" maxlength = "15" contenteditable = "true" placeholder ="">请输入标题</div>
+   
+    
+    <div class="line"></div>
+    
+<!--     ZSSRichTextEditor Editable Content-->
+    <div id="zss_editor_content" class="zs_editor_content" contenteditable="true" placeholder="">正文</div>
 
-	<!-- Footer -->
-	<div id="zss_editor_footer"></div>
+    <!-- Footer -->
+    <div id="zss_editor_footer"></div>
 
 </body>
 </html>

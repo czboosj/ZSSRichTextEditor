@@ -565,6 +565,7 @@
 				ORGANIZATIONNAME = "Zed Said Studio";
 				TargetAttributes = {
 					4581EB7B184845790048CAB0 = {
+						DevelopmentTeam = WYX4GYB7S5;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -574,6 +575,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 4581EB73184845780048CAB0;
@@ -880,7 +882,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = WYX4GYB7S5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ZSSRichTextEditor/ZSSRichTextEditor-Prefix.pch";
 				INFOPLIST_FILE = "ZSSRichTextEditor/ZSSRichTextEditor-Info.plist";
@@ -888,6 +890,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zedsaid.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ZSSRichTextEditor;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = czxxxdev;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -899,7 +902,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = WYX4GYB7S5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ZSSRichTextEditor/ZSSRichTextEditor-Prefix.pch";
 				INFOPLIST_FILE = "ZSSRichTextEditor/ZSSRichTextEditor-Info.plist";
@@ -907,6 +910,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zedsaid.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ZSSRichTextEditor;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = czxxxdev;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

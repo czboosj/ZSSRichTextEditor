@@ -186,6 +186,11 @@ static Class hackishFixClass = Nil;
  */
 @property (nonatomic, strong) NSString *internalHTML;
 
+/**
+  html 的标题
+ */
+@property (nonatomic, strong) NSString *internalHTMLTitle;
+
 /*
  *  NSString holding the css
  */
@@ -282,8 +287,20 @@ static CGFloat kDefaultScale = 0.5;
         UIToolbar *keyboardToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(-7, -1, 44, 44)];
         [toolbarCropper addSubview:keyboardToolbar];
         
-        self.keyboardItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSkeyboard.png"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissKeyboard)];
-        keyboardToolbar.items = @[self.keyboardItem];
+//        self.keyboardItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZSSkeyboard.png"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissKeyboard)];
+//        keyboardToolbar.items = @[self.keyboardItem];
+//        [self.toolbarHolder addSubview:toolbarCropper];
+        
+        /// 更改来自 https://github.com/nnhubbard/ZSSRichTextEditor/pull/179/commits/63c01670c716f3aa47183b623f2249f227e4852d
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+        
+        [btn addTarget:self action:@selector(dismissKeyboard) forControlEvents:UIControlEventTouchUpInside];
+        UIImage *image = [[UIImage imageNamed:@"ZSSkeyboard.png" ] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [btn setImage:image forState:UIControlStateNormal];
+        [btn setTintColor:[self barButtonItemDefaultColor]];
+        
+        [toolbarCropper addSubview:btn];
+        
         [self.toolbarHolder addSubview:toolbarCropper];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0.6f, 44)];
@@ -884,9 +901,10 @@ static CGFloat kDefaultScale = 0.5;
     if (self.customZSSBarButtonItems != nil) {
         items = [items arrayByAddingObjectsFromArray:self.customZSSBarButtonItems];
     }
-    
+    // 更改来自 https://github.com/nnhubbard/ZSSRichTextEditor/pull/179/commits/63c01670c716f3aa47183b623f2249f227e4852d
     // get the width before we add custom buttons
-    CGFloat toolbarWidth = items.count == 0 ? 0.0f : (CGFloat)(items.count * 39) - 10;
+//    CGFloat toolbarWidth = items.count == 0 ? 0.0f : (CGFloat)(items.count * 39) - 10;
+     CGFloat toolbarWidth = items.count == 0 ? 0.0f : (CGFloat)(items.count * 44);
     
     if(self.customBarButtonItems != nil)
     {
@@ -974,13 +992,19 @@ static CGFloat kDefaultScale = 0.5;
 - (void)setHTML:(NSString *)html {
     
     self.internalHTML = html;
-    
+    /// 加载完成在设置
     if (self.editorLoaded) {
         [self updateHTML];
     }
     
 }
-
+- (void)setHtmlTitle:(NSString *)title{
+    self.internalHTMLTitle = title;
+    if (self.editorLoaded) {
+        [self updateHTML];
+    }
+    
+}
 - (void)updateHTML {
     
     NSString *html = self.internalHTML;
@@ -989,8 +1013,20 @@ static CGFloat kDefaultScale = 0.5;
     NSString *trigger = [NSString stringWithFormat:@"zss_editor.setHTML(\"%@\");", cleanedHTML];
     [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
     
+    NSString *htmlTitle = self.internalHTMLTitle;
+    if(htmlTitle != nil && [htmlTitle length]>0){
+        NSString *trigger = [NSString stringWithFormat:@"zss_editor.setHtmlTitle(\"%@\");", htmlTitle];
+        [self.editorView stringByEvaluatingJavaScriptFromString:trigger];
+    }
+    
+    
 }
-
+- (NSString *)getHtmlTitle{
+    NSString *html = [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.getHtmlTitle();"];
+    html = [self removeQuotesFromHTML:html];
+    html = [self tidyHTML:html];
+    return html;
+}
 - (NSString *)getHTML {
     
     NSString *html = [self.editorView stringByEvaluatingJavaScriptFromString:@"zss_editor.getHTML();"];
@@ -1933,7 +1969,9 @@ static CGFloat kDefaultScale = 0.5;
     // Correct Curve
     UIViewAnimationOptions animationOptions = curve << 16;
     
-    const int extraHeight = 10;
+//    const int extraHeight = 10;
+    //https://www.jianshu.com/p/e309d7f95e95
+    const int extraHeight = 0;
     
     if ([notification.name isEqualToString:UIKeyboardWillShowNotification]) {
         

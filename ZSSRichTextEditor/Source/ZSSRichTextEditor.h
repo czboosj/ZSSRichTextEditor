@@ -116,7 +116,8 @@ static NSString * const ZSSRichTextEditorToolbarFonts = @"com.zedsaid.toolbarite
  *
  */
 - (NSString *)getHTML;
-
+- (NSString *)getHtmlTitle;
+- (void )setHtmlTitle:(NSString *)title;
 /**
  *  Returns the plain text from the Rich Text Editor
  *

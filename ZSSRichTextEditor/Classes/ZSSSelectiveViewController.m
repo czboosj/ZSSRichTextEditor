@@ -23,9 +23,8 @@
     
     // HTML Content to set in the editor
     NSString *html = @"<p>Example showing just a few toolbar buttons.</p>";
-    
     // Choose which toolbar items to show
-    self.enabledToolbarItems = @[ZSSRichTextEditorToolbarBold, ZSSRichTextEditorToolbarH1, ZSSRichTextEditorToolbarParagraph];
+    self.enabledToolbarItems = @[ZSSRichTextEditorToolbarInsertImage,ZSSRichTextEditorToolbarBold,ZSSRichTextEditorToolbarItalic,ZSSRichTextEditorToolbarUndo,ZSSRichTextEditorToolbarRedo,ZSSRichTextEditorToolbarInsertLink];
     
     // Set the HTML contents of the editor
     [self setHTML:html];

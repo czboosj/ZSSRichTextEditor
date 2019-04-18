@@ -36,16 +36,17 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportHTML)];
     
     // HTML Content to set in the editor
-    NSString *html = @"<div class='test'></div><!-- This is an HTML comment -->"
-    "<p>This is a test of the <strong>ZSSRichTextEditor</strong> by <a title=\"Zed Said\" href=\"http://www.zedsaid.com\">Zed Said Studio</a></p>";
+    NSString *html = @"<p>1212121</p>";
     
     // Set the base URL if you would like to use relative links, such as to images.
     self.baseURL = [NSURL URLWithString:@"http://www.zedsaid.com"];
     self.shouldShowKeyboard = NO;
     // Set the HTML contents of the editor
-    [self setPlaceholder:@"This is a placeholder that will show when there is no content(html)"];
+   /// 这个设置方法有bug 无法再次点击到
+//    [self setPlaceholder:@""];
     
     [self setHTML:html];
+    [self setHtmlTitle:@"测试标题"];
     
 }
 
@@ -80,7 +81,7 @@
 - (void)exportHTML {
     
     NSLog(@"%@", [self getHTML]);
-    
+    NSLog(@"标题:%@", [self getHtmlTitle]);
 }
 
 - (void)editorDidChangeWithText:(NSString *)text andHTML:(NSString *)html {

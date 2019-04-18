@@ -76,6 +76,26 @@ zss_editor.init = function() {
 
 zss_editor.updateOffset = function() {
     
+//    if (!zss_editor.updateScrollOffset)
+//        return;
+//
+//    var offsetY = window.document.body.scrollTop;
+//
+//    var footer = $('#zss_editor_footer');
+//
+//    var maxOffsetY = footer.offset().top - zss_editor.contentHeight;
+//
+//    if (maxOffsetY < 0)
+//        maxOffsetY = 0;
+//
+//    if (offsetY > maxOffsetY)
+//    {
+//        window.scrollTo(0, maxOffsetY);
+//    }
+//
+//    zss_editor.setScrollPosition();
+    
+    ///来自 https://www.jianshu.com/p/e309d7f95e95
     if (!zss_editor.updateScrollOffset)
         return;
     
@@ -86,8 +106,10 @@ zss_editor.updateOffset = function() {
     var maxOffsetY = footer.offset().top - zss_editor.contentHeight;
     
     if (maxOffsetY < 0)
+    {
         maxOffsetY = 0;
-    
+    }
+    maxOffsetY = maxOffsetY + 100;
     if (offsetY > maxOffsetY)
     {
         window.scrollTo(0, maxOffsetY);
@@ -106,7 +128,24 @@ zss_editor.setScrollPosition = function() {
     var position = window.pageYOffset;
     window.location = 'scroll://'+position;
 }
-
+zss_editor.setTitlePlaceholder = function(placeholder) {
+    
+    var editor = $('#zss_editor_title');
+    
+    //set placeHolder
+    editor.attr("placeholder",placeholder);
+    
+    //set focus
+    editor.focusout(function(){
+                    var element = $(this);
+                    if (!element.text().trim().length) {
+                    element.empty();
+                    }
+                    });
+    
+    
+    
+}
 
 zss_editor.setPlaceholder = function(placeholder) {
     
@@ -483,7 +522,10 @@ zss_editor.insertImageBase64String = function(imageBase64String, alt) {
     zss_editor.insertHTML(html);
     zss_editor.enabledEditingItems();
 }
-
+zss_editor.setHtmlTitle = function(title){
+    var editor = $('#zss_editor_title');
+    editor.html(title);
+}
 zss_editor.setHTML = function(html) {
     var editor = $('#zss_editor_content');
     editor.html(html);
@@ -493,7 +535,11 @@ zss_editor.insertHTML = function(html) {
     document.execCommand('insertHTML', false, html);
     zss_editor.enabledEditingItems();
 }
-
+zss_editor.getHtmlTitle = function(){
+    var h = document.getElementById("zss_editor_title").innerHTML;
+    
+    return h;
+}
 zss_editor.getHTML = function() {
     
     // Images
